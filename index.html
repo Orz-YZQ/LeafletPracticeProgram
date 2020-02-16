@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>MyMap</title>
+		<link rel="stylesheet" type="text/css" href="css/leaflet.css" />
+		<script src="js/leaflet.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<button onclick="alertme()" id="mybtn">click me</button>
+		<div id="mapid" style="width: 1000px; height:600px;">
+		</div>
+
+		<script type="text/javascript">
+			var key = '6d7b4cc72e9a1373d1a5fb474ad47a4b';
+			var veclayer = L.tileLayer('http://t0.tianditu.com/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk=' + key, {});
+			var	annotionlayer = L.tileLayer('http://t0.tianditu.com/DataServer?T=cva_w&X={x}&Y={y}&L={z}&tk=' + key, {});
+
+			var mymap = L.map('mapid', {
+				center: [30, 114],
+    			zoom: 10,
+    			zoomAnimation: true,
+				layers: [veclayer, annotionlayer]
+			});
+			
+			var baselayer = {
+				'矢量': veclayer
+			};
+			
+			var overlayer = {
+				'标注': annotionlayer
+			};
+			
+			L.control.layers(baselayer, overlayer).addTo(mymap);
+		</script>
+	</body>
+
+</html>
